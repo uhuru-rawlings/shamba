@@ -1,0 +1,19 @@
+form .form-control{
+    height: 45px;
+    border-radius: 3px;
+}
+form .btn-primary{
+    height: 48px;
+    border-radius: 3px;
+}
+.open_model{
+    text-align: right;
+}
+.open_model form{
+    text-align: left !important;
+}
+td a{
+    padding: 3px 10px;
+    margin-right: 10px;
+    border-radius: 2px;
+}
