@@ -1,3 +1,4 @@
+<link rel="shortcut icon" href="<?php echo BASE_URL ?>assets/images/OPG Farm Logo2.png" type="image/x-icon">
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
