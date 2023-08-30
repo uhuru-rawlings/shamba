@@ -60,7 +60,23 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo BASE_URL ?>logout.php" class="nav-link <?php if($_SESSION['active'] == 'project'){ echo 'active'; } ?>">
+            <a href="<?php echo BASE_URL ?>scope/index.php" class="nav-link <?php if($_SESSION['active'] == 'scope'){ echo 'active'; } ?>">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>
+                Scoping
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo BASE_URL ?>expenditure/index.php" class="nav-link <?php if($_SESSION['active'] == 'expenditure'){ echo 'active'; } ?>">
+              <i class="nav-icon fas fa-dollar"></i>
+              <p>
+                Expenditure
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo BASE_URL ?>logout.php" class="nav-link <?php if($_SESSION['active'] == 'logout'){ echo 'active'; } ?>">
               <i class="nav-icon fas fa-right-from-bracket"></i>
               <p>
                 Logout
