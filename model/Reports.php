@@ -43,5 +43,45 @@
                 return ['status' => 404, 'message' => 'No projects found'];
             }
         }
+
+        public function usersCount(){
+            $sql = "SELECT * FROM Registration";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute();
+
+            return $query -> rowCount();
+        }
+
+        public function projectsCount(){
+            $sql = "SELECT * FROM Scope";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute();
+
+            return $query -> rowCount();
+        }
+
+        public function expenseCount(){
+            $sql = "SELECT * FROM Expenditure";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute();
+
+            return $query -> rowCount();
+        }
+
+        public function expenseTotal(){
+            $sql = "SELECT * FROM Projects";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute();
+
+            $total = 0;
+            if($query -> rowCount() > 0){
+                while($res = $query -> fetchAll(PDO::FETCH_ASSOC)){
+                    foreach($res as $res){
+                        $total += $res['Amount'];
+                    }
+                }
+            }
+            return $total;
+        }
     }
 ?>

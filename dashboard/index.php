@@ -65,6 +65,98 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>
+                  <?php
+                    $conn = new Database();
+                    $db   = $conn -> connection();
+                    $users = new Reports($db);
+                    echo $users -> usersCount();
+                  ?>
+                </h3>
+
+                <p>Users</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-user"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>
+                  <?php
+                    $conn = new Database();
+                    $db   = $conn -> connection();
+                    $users = new Reports($db);
+                    echo $users -> projectsCount();
+                  ?>
+                </h3>
+
+                <p>Projects</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-tractor"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>
+                  <?php
+                    $conn = new Database();
+                    $db   = $conn -> connection();
+                    $users = new Reports($db);
+                    echo $users -> expenseCount();
+                  ?>
+                </h3>
+
+                <p>Expenditure</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-dollar"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>
+                  <?php
+                    $conn = new Database();
+                    $db   = $conn -> connection();
+                    $users = new Reports($db);
+                    echo number_format($users -> expenseTotal());
+                  ?>
+                </h3>
+
+                <p>Total Expenditures</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+
       <h2>Users Table</h2>
       <div class="table-responsive">
         <table class="table table-active table-hover">
