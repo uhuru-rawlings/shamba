@@ -1,6 +1,7 @@
 <?php
   include_once("../config.php");
   include_once("../model/Registration.php");
+  include_once("../model/Reports.php");
   include_once("../database/Database.php");
   $_SESSION['active'] = "home";
 ?>
@@ -64,6 +65,7 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+      <h2>Users Table</h2>
       <div class="table-responsive">
         <table class="table table-active table-hover">
           <thead>
@@ -101,6 +103,43 @@
                   }
               ?>
           </tbody>
+        </table>
+      </div>
+      <div class="table-responsive">
+        <h2>Reports Table</h2>
+        <table class="table table-active table-stripped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Project</th>
+                    <th>Season</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $conn = new Database();
+                    $db   = $conn -> connection();
+
+                    $reports = new Reports($db);
+                    $report  = $reports -> getReports();
+
+                    if($report['status'] == 200){
+                        foreach($report['data'] as $report){
+                ?>
+                <tr>
+                    <td><?php echo $report['id'] ?></td>
+                    <td><?php echo $report['ProjectName'] ?></td>
+                    <td><?php echo $report['Season'] ?></td>
+                    <td><?php echo number_format($report['total_amount']) ?></td>
+                    <td><a href="../reports/detailed-reports.php?p=<?php echo $report['ProjectName'] ?>&s=<?php echo $report['Season'] ?>" class="bg-primary text-white">see details</a>
+                </tr>
+                <?php
+                        }
+                    }
+                ?>
+            </tbody>
         </table>
       </div>
         <!-- /.row -->

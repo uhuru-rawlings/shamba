@@ -15,6 +15,7 @@
 
         if($save['status'] == 200 || $save['status'] == 201){
             $_SESSION['success'] = $save['message'];
+            $_SESSION['u_name'] = $save['user'];
             $_SESSION['user_a'] = $_POST['username'];
             header("Location: ../dashboard/index.php");
         }else{

@@ -101,7 +101,7 @@
             if($query -> rowCount() > 0){
                 while($results = $query -> fetch(PDO::FETCH_ASSOC)){
                     if(password_verify($this -> Password,$results['Password'])){
-                        return ['status' => 200, 'message' => 'login was successful, welcome'];
+                        return ['status' => 200, 'message' => 'login was successful, welcome', 'user' => $results['Fname']];
                     }else{
                         return ['status' => 403, 'message' => 'Wrong password, please try again'];
                     }
