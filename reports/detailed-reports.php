@@ -3,6 +3,7 @@
   include_once("../model/Projects.php");
   include_once("../model/Scope.php");
   include_once("../model/Expenditure.php");
+  include_once("../model/Reports.php");
   include_once("../database/Database.php");
   $_SESSION['active'] = "project";
 ?>
@@ -83,7 +84,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="functions/save-projects-func.php" method="post">
+                    <form action="../projects/functions/save-projects-func.php" method="post">
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label for="project_name">Project Name</label>
@@ -191,8 +192,10 @@
                     $conn = new Database();
                     $db   = $conn -> connection();
 
-                    $projects = new Projects($db);
-                    $project  = $projects -> getProjects();
+                    $projects             = new Reports($db);
+                    $projects -> Project  = $_GET['p'];
+                    $projects -> Season   = $_GET['s'];
+                    $project  = $projects -> getReportDetails();
 
                     if($project['status'] == 200){
                         foreach($project['data'] as $project){
@@ -207,7 +210,7 @@
                     <td><?php echo $project['Amount'] ?></td>
                     <td><?php echo $project['Date'] ?></td>
                     <td><?php echo $project['DateAdded'] ?></td>
-                    <td><a href="" id="<?php echo $project['id'] ?>" class="bg-primary text-white" data-toggle="modal" data-target="#exampleModal1" onclick="getActiveRecordId(this.id)">Edit</a><a href="functions/delete-project-funct.php?project=<?php echo $project['id'] ?>" class="bg-danger text-white">Delete</a></td>
+                    <td><a href="" id="<?php echo $project['id'] ?>" class="bg-primary text-white" data-toggle="modal" data-target="#exampleModal1" onclick="getActiveRecordId(this.id)">Edit</a><a href="../projects/functions/delete-project-funct.php?project=<?php echo $project['id'] ?>" class="bg-danger text-white">Delete</a></td>
                 </tr>
                 <?php
                         }
@@ -234,7 +237,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="functions/update-projects-func.php" method="post">
+                <form action="../projects/functions/update-projects-func.php" method="post">
                     <div class="form-group" style="display: none;">
                         <input type="text" name="updates" id="updates" class="form-control" placeholder="Project Name" required>
                     </div>

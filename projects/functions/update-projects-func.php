@@ -13,6 +13,7 @@
         $projects -> Tonage      = $_POST['Tonage'];
         $projects -> Size        = $_POST['size'];
         $projects -> Season      = $_POST['Season'];
+        $projects -> Expense     = $_POST['expenditure'];
         $projects -> Amount      = $_POST['amount'];
         $projects -> Date        = $_POST['date'];
 

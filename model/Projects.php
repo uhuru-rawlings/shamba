@@ -6,6 +6,7 @@
         public $Size;
         public $Season;
         public $Amount;
+        public $Expense;
         public $Date;
         private $conn;
 
@@ -16,9 +17,9 @@
 
         public function createProject()
         {
-            $sql = "INSERT INTO Projects(`ProjectName`,`Tonage`,`Size`,`Season`,`Amount`,`Date`) VALUES(?,?,?,?,?,?)";
+            $sql = "INSERT INTO Projects(`ProjectName`,`Tonage`,`Size`,`Season`,`Expense`,`Amount`,`Date`) VALUES(?,?,?,?,?,?,?)";
             $query = $this -> conn -> prepare($sql);
-            $query -> execute([$this -> ProjectName, $this -> Tonage, $this -> Size, $this -> Season, $this -> Amount, $this -> Date]);
+            $query -> execute([$this -> ProjectName, $this -> Tonage, $this -> Size, $this -> Season, $this -> Expense, $this -> Amount, $this -> Date]);
 
             if($query){
                 return ['status' => 201, 'message' => 'project created successfully'];
@@ -29,9 +30,9 @@
 
         public function updateProject()
         {
-            $sql = "UPDATE Projects SET `ProjectName` = ?,`Tonage` = ?,`Size` = ?,`Season` = ?,`Amount` = ?,`Date` = ? WHERE id = ?";
+            $sql = "UPDATE Projects SET `ProjectName` = ?,`Tonage` = ?,`Size` = ?,`Season` = ?, `Expense` = ?,`Amount` = ?,`Date` = ? WHERE id = ?";
             $query = $this -> conn -> prepare($sql);
-            $query -> execute([$this -> ProjectName, $this -> Tonage, $this -> Size, $this -> Season, $this -> Amount, $this -> Date, $this -> Id]);
+            $query -> execute([$this -> ProjectName, $this -> Tonage, $this -> Size, $this -> Season, $this -> Expense, $this -> Amount, $this -> Date, $this -> Id]);
 
             if($query){
                 return ['status' => 201, 'message' => 'project created successfully'];

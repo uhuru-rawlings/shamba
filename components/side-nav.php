@@ -76,6 +76,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?php echo BASE_URL ?>reports/index.php" class="nav-link <?php if($_SESSION['active'] == 'reports'){ echo 'active'; } ?>">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Reports
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?php echo BASE_URL ?>logout.php" class="nav-link <?php if($_SESSION['active'] == 'logout'){ echo 'active'; } ?>">
               <i class="nav-icon fas fa-right-from-bracket"></i>
               <p>
