@@ -4,5 +4,7 @@
         unset($_SESSION['user_a']);
         $_SESSION['success'] = "you have logged out successfully";
         header("Location: index.php");
+    }else{
+        header("Location: index.php");
     }
 ?>
