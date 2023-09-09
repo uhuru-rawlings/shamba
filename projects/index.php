@@ -11,7 +11,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projects</title>
+  <title>Farm</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -50,12 +50,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Projects</h1>
+            <h1 class="m-0">Farm</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?php echo BASE_URL ?>dashboard/index.php">Home</a></li>
-              <li class="breadcrumb-item active">Projects</li>
+              <li class="breadcrumb-item active">Farm</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -104,16 +104,6 @@
                                 </select>
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="Tonage">Tonage</label>
-                                <input type="text" name="Tonage" id="Tonage" class="form-control" placeholder="Tonage" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label for="size">Size</label>
-                                <input type="text" name="size" id="size" class="form-control" placeholder="Size" required>
-                            </div>
-                            <div class="form-group col-sm-6">
                                 <label for="Season">Season</label>
                                 <select name="Season" id="Season" class="form-control" required>
                                     <option value=""> -- SELECT SEASON --</option>
@@ -122,7 +112,7 @@
                                         $db   = $conn -> connection();
                                         $users = new Scope($db);
                                         $user  = $users -> getScopes();
-
+    
                                         if($user['status'] == 200){
                                             foreach($user['data'] as $expense){
                                                 echo "<option value='{$expense['Season']}'>{$expense['Season']}</option>";
@@ -176,8 +166,6 @@
                 <tr>
                     <th>#</th>
                     <th>Project Name</th>
-                    <th>Tonage</th>
-                    <th>Size</th>
                     <th>Season</th>
                     <th>Expense</th>
                     <th>Amount</th>
@@ -200,8 +188,6 @@
                 <tr>
                     <td><?php echo $project['id'] ?></td>
                     <td><?php echo $project['ProjectName'] ?></td>
-                    <td><?php echo $project['Tonage'] ?></td>
-                    <td><?php echo $project['Size'] ?></td>
                     <td><?php echo $project['Season'] ?></td>
                     <td><?php echo $project['Expense'] ?></td>
                     <td><?php echo $project['Amount'] ?></td>
@@ -258,16 +244,6 @@
                             </select>
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="Tonage">Tonage</label>
-                            <input type="text" name="Tonage" id="Tonages" class="form-control" placeholder="Tonage" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            <label for="size">Size</label>
-                            <input type="text" name="size" id="sizes" class="form-control" placeholder="Size" required>
-                        </div>
-                        <div class="form-group col-sm-6">
                             <label for="Season">Season</label>
                             <select name="Season" id="Seasons" class="form-control" required>
                                 <option value=""> -- SELECT SEASON --</option>
@@ -276,7 +252,7 @@
                                     $db   = $conn -> connection();
                                     $users = new Scope($db);
                                     $user  = $users -> getScopes();
-
+    
                                     if($user['status'] == 200){
                                         foreach($user['data'] as $expense){
                                             echo "<option value='{$expense['Season']}'>{$expense['Season']}</option>";
@@ -359,7 +335,7 @@
 
         console.log(e)
         var xhr = new XMLHttpRequest();
-        var url = 'http://127.0.0.1/shamba/projects/functions/get-projects-funct.php';
+        var url = 'http://opgfarm.site/projects/functions/get-projects-funct.php';
 
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

@@ -13,8 +13,8 @@
 
         $projects = new Projects($db);
         $projects -> ProjectName = $_POST['project_name'];
-        $projects -> Tonage      = $_POST['Tonage'];
-        $projects -> Size        = $_POST['size'];
+        // $projects -> Tonage      = $_POST['Tonage'];
+        // $projects -> Size        = $_POST['size'];
         $projects -> Expense     = $_POST['expenditure'];
         $projects -> Season      = $_POST['Season'];
         $projects -> Amount      = $_POST['amount'];

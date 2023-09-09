@@ -234,7 +234,7 @@
 
         console.log(e)
         var xhr = new XMLHttpRequest();
-        var url = 'http://127.0.0.1/shamba/scope/functions/get-scope-funct.php';
+        var url = 'http://opgfarm.site/scope/functions/get-scope-funct.php';
 
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

@@ -54,7 +54,7 @@
 
     var xhr = new XMLHttpRequest();
       // var url = 'https://admin.couplesnmoney.simbasms.com/services/delete-sesssion.php';
-      var url = 'http://127.0.0.1/shamba/services/delete-sessions.php';
+      var url = 'http://opgfarm.site/services/delete-sessions.php';
 
       xhr.open('POST', url, true);
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

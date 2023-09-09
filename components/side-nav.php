@@ -55,7 +55,7 @@
             <a href="<?php echo BASE_URL ?>projects/index.php" class="nav-link <?php if($_SESSION['active'] == 'project'){ echo 'active'; } ?>">
               <i class="nav-icon fas fa-tractor"></i>
               <p>
-                Projects
+                Farm
               </p>
             </a>
           </li>

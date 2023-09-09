@@ -67,7 +67,114 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+        <div class="search_report py-5">
+          <form action="#" method="post">
+            <div class="row">
+              <div class="form-group col-sm-3">
+                  <label for="years">Year</label>
+                  <select name="years" id="years" class="form-control">
+                      <option value=""> -- SELECT YEAR --</option>
+                      <?php                            
+                          $year = date('Y');
+                          for($i = 0; $i < 15; $i++){
+                            $f_year = $year - $i;
+                            echo "<option value='{$f_year}'>{$f_year}</option>";
+                          }
+                      ?>
+                  </select>
+              </div>
+              <div class="form-group col-sm-3">
+                  <label for="project_name">Project Name</label>
+                  <select name="project_name" id="project_names1" class="form-control">
+                      <option value=""> -- SELECT PROJECT --</option>
+                      <?php                            
+                          $conn = new Database();
+                          $db   = $conn -> connection();
+                          $users = new Scope($db);
+                          $user  = $users -> getScopes();
+
+                          if($user['status'] == 200){
+                              foreach($user['data'] as $expense){
+                                  echo "<option value='{$expense['Project']}'>{$expense['Project']}</option>";
+                              }
+                          }
+                      ?>
+                  </select>
+              </div>
+              <div class="form-group col-sm-3">
+                  <label for="Season">Season</label>
+                  <select name="Season" id="Seasons1" class="form-control">
+                      <option value=""> -- SELECT SEASON --</option>
+                      <?php                            
+                          $conn = new Database();
+                          $db   = $conn -> connection();
+                          $users = new Scope($db);
+                          $user  = $users -> getScopes();
+
+                          if($user['status'] == 200){
+                              foreach($user['data'] as $expense){
+                                  echo "<option value='{$expense['Season']}'>{$expense['Season']}</option>";
+                              }
+                          }
+                      ?>
+                  </select>
+              </div>
+              <div class="form-group col-sm-3">
+                <label for="expenditure">Expenditure</label>                
+                <select name="expenditure" id="expenditures1" class="form-control">
+                    <option value=""> -- SELECT EXPENDITURE --</option>
+                    <?php                            
+                        $conn = new Database();
+                        $db   = $conn -> connection();
+                        $users = new Expenditure($db);
+                        $user  = $users -> getExpenses();
+  
+                        if($user['status'] == 200){
+                            foreach($user['data'] as $expense){
+                                echo "<option value='{$expense['Expense']}'>{$expense['Expense']}</option>";
+                            }
+                        }
+                    ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Search" onclick="return validateSearch()" class="btn btn-primary">
+            </div>
+          </form>
+        </div>
       <div class="table-responsive">
+        <?php
+            $conn = new Database();
+            $db   = $conn -> connection();
+
+            $reports = new Reports($db);
+            if(isset($_POST['project_name']) || isset($_POST['Season']) || isset($_POST['expenditure']) || isset($_POST['years'])){
+              $reports -> projectName  = $_POST['project_name'];
+              $reports -> Season       = $_POST['Season'];
+              $reports -> Expenditure  = $_POST['expenditure'];
+              $reports -> Year         = $_POST['years'];
+              
+              $report  = $reports -> searchReports();
+            }else{
+              $report  = $reports -> getReports();
+            }
+        ?>
+            <div class="expenses">
+            <?php
+              $exp = [];
+              if($report['status'] == 200){
+                foreach($report['data'] as $rep){
+                  array_push($exp,$rep['Expense']);
+                }
+                $repeatedValues = array_diff_key($exp, array_unique($exp));
+
+                echo "All Expenses:- ".implode(",", $exp);
+                echo "<br>";
+                echo "Shared Expenses:- ".implode(",", $repeatedValues);
+              }
+            ?>
+            </div>
         <table class="table table-active table-stripped">
             <thead>
                 <tr>
@@ -79,21 +186,15 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
-                    $conn = new Database();
-                    $db   = $conn -> connection();
-
-                    $reports = new Reports($db);
-                    $report  = $reports -> getReports();
-
-                    if($report['status'] == 200){
-                        foreach($report['data'] as $report){
-                ?>
+              <?php
+                if($report['status'] == 200){
+                  foreach($report['data'] as $report){
+              ?>
                 <tr>
                     <td><?php echo $report['id'] ?></td>
                     <td><?php echo $report['ProjectName'] ?></td>
                     <td><?php echo $report['Season'] ?></td>
-                    <td><?php echo number_format($report['total_amount']) ?></td>
+                    <td><?php  if($report['total_amount']){ echo number_format($report['total_amount']); }else{ echo $report['Amount']; } ?></td>
                     <td><a href="detailed-reports.php?p=<?php echo $report['ProjectName'] ?>&s=<?php echo $report['Season'] ?>" class="bg-primary text-white">see details</a>
                 </tr>
                 <?php
@@ -141,13 +242,31 @@
 <script src="<?php echo BASE_URL ?>dist/js/pages/dashboard3.js"></script>
 </body>
 </html>
+
+<script>
+  const validateSearch = () => {
+    let project_names = document.getElementById('project_names1').value.trim();
+    let Seasons = document.getElementById('Seasons1').value.trim();
+    let expenditures = document.getElementById('expenditures1').value.trim();
+    let years = document.getElementById('years').value.trim();
+
+
+    if(project_names == "" && Seasons == "" && expenditures == "" && years == ""){
+      alert('please select a search item');
+      return false;
+    }else{
+      return true;
+    }
+  }
+</script>
+
 <script>
     const getActiveRecordId = (e) => {
         document.getElementById("updates").value = e;
 
         console.log(e)
         var xhr = new XMLHttpRequest();
-        var url = 'http://127.0.0.1/shamba/projects/functions/get-projects-funct.php';
+        var url = 'http://opgfarm.site/projects/functions/get-projects-funct.php';
 
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
