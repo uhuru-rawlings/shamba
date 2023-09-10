@@ -335,7 +335,8 @@
 
         console.log(e)
         var xhr = new XMLHttpRequest();
-        var url = 'http://opgfarm.site/projects/functions/get-projects-funct.php';
+        // var url = 'http://opgfarm.site/projects/functions/get-projects-funct.php';
+        var url = 'functions/get-projects-funct.php';
 
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -346,8 +347,8 @@
                 var jsonResponse = JSON.parse(response);
                 console.log(jsonResponse.data); // Display the response in the console
                 document.getElementById("project_names").value = jsonResponse.data.ProjectName
-                document.getElementById("Tonages").value = jsonResponse.data.Tonage
-                document.getElementById("sizes").value = jsonResponse.data.Size
+                // document.getElementById("Tonages").value = jsonResponse.data.Tonage
+                // document.getElementById("sizes").value = jsonResponse.data.Size
                 document.getElementById("Seasons").value = jsonResponse.data.Season
                 document.getElementById("amounts").value = jsonResponse.data.Amount
                 document.getElementById("dates").value = jsonResponse.data.Date

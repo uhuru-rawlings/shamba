@@ -234,7 +234,7 @@
 
         console.log(e)
         var xhr = new XMLHttpRequest();
-        var url = 'http://opgfarm.site/scope/functions/get-scope-funct.php';
+        var url = 'functions/get-scope-funct.php';
 
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

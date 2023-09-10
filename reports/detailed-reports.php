@@ -5,7 +5,7 @@
   include_once("../model/Expenditure.php");
   include_once("../model/Reports.php");
   include_once("../database/Database.php");
-  $_SESSION['active'] = "project";
+  $_SESSION['active'] = "reports";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,9 +69,6 @@
       <div class="container-fluid">
       <div class="open_model mb-5">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Add Expenditure
-        </button>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -105,16 +102,6 @@
                                 </select>
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="Tonage">Tonage</label>
-                                <input type="text" name="Tonage" id="Tonage" class="form-control" placeholder="Tonage" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label for="size">Size</label>
-                                <input type="text" name="size" id="size" class="form-control" placeholder="Size" required>
-                            </div>
-                            <div class="form-group col-sm-6">
                                 <label for="Season">Season</label>
                                 <select name="Season" id="Season" class="form-control" required>
                                     <option value=""> -- SELECT SEASON --</option>
@@ -123,7 +110,7 @@
                                         $db   = $conn -> connection();
                                         $users = new Scope($db);
                                         $user  = $users -> getScopes();
-
+    
                                         if($user['status'] == 200){
                                             foreach($user['data'] as $expense){
                                                 echo "<option value='{$expense['Season']}'>{$expense['Season']}</option>";
@@ -184,7 +171,6 @@
                     <th>Amount</th>
                     <th>Date</th>
                     <th>Date Added</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -210,7 +196,6 @@
                     <td><?php echo $project['Amount'] ?></td>
                     <td><?php echo $project['Date'] ?></td>
                     <td><?php echo $project['DateAdded'] ?></td>
-                    <td><a href="" id="<?php echo $project['id'] ?>" class="bg-primary text-white" data-toggle="modal" data-target="#exampleModal1" onclick="getActiveRecordId(this.id)">Edit</a><a href="../projects/functions/delete-project-funct.php?project=<?php echo $project['id'] ?>" class="bg-danger text-white">Delete</a></td>
                 </tr>
                 <?php
                         }
@@ -261,16 +246,6 @@
                             </select>
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="Tonage">Tonage</label>
-                            <input type="text" name="Tonage" id="Tonages" class="form-control" placeholder="Tonage" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            <label for="size">Size</label>
-                            <input type="text" name="size" id="sizes" class="form-control" placeholder="Size" required>
-                        </div>
-                        <div class="form-group col-sm-6">
                             <label for="Season">Season</label>
                             <select name="Season" id="Seasons" class="form-control" required>
                                 <option value=""> -- SELECT SEASON --</option>
@@ -279,7 +254,7 @@
                                     $db   = $conn -> connection();
                                     $users = new Scope($db);
                                     $user  = $users -> getScopes();
-
+    
                                     if($user['status'] == 200){
                                         foreach($user['data'] as $expense){
                                             echo "<option value='{$expense['Season']}'>{$expense['Season']}</option>";
@@ -362,7 +337,7 @@
 
         console.log(e)
         var xhr = new XMLHttpRequest();
-        var url = 'http://opgfarm.site/projects/functions/get-projects-funct.php';
+        var url = 'functions/get-projects-funct.php';
 
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -373,8 +348,8 @@
                 var jsonResponse = JSON.parse(response);
                 console.log(jsonResponse.data); // Display the response in the console
                 document.getElementById("project_names").value = jsonResponse.data.ProjectName
-                document.getElementById("Tonages").value = jsonResponse.data.Tonage
-                document.getElementById("sizes").value = jsonResponse.data.Size
+                // document.getElementById("Tonages").value = jsonResponse.data.Tonage
+                // document.getElementById("sizes").value = jsonResponse.data.Size
                 document.getElementById("Seasons").value = jsonResponse.data.Season
                 document.getElementById("amounts").value = jsonResponse.data.Amount
                 document.getElementById("dates").value = jsonResponse.data.Date

@@ -19,9 +19,9 @@
         
             } else {
                 $this -> db_host     = "127.0.0.1";
-                $this -> db_user     = "";
-                $this -> db_password = "";
-                $this -> db_name     = "";
+                $this -> db_user     = "opgfarm_opgfarm";
+                $this -> db_password = "z&fYP=!Eg2X]";
+                $this -> db_name     = "opgfarm_opgfarm";
             }        
         }
 

@@ -1,6 +1,7 @@
 form .form-control{
     height: 45px;
     border-radius: 3px;
+    /* color: rgba(2, 0, 20, 0.5); */
 }
 form .btn-primary{
     height: 48px;

@@ -169,9 +169,9 @@
                 }
                 $repeatedValues = array_diff_key($exp, array_unique($exp));
 
-                echo "All Expenses:- ".implode(",", $exp);
+                echo "<b>All Expenses:-</b> ".implode(",", $exp);
                 echo "<br>";
-                echo "Shared Expenses:- ".implode(",", $repeatedValues);
+                echo "<b>Shared Expenses:-</b> ".implode(",", $repeatedValues);
               }
             ?>
             </div>

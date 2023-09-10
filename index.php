@@ -35,6 +35,7 @@
 <div class="wrapper">
     <div class="col-sm-4 m-auto">
         <form action="functions/login-funct.php" method="post">
+            <h2 class="text-center">Welcome Back!</h2>
             <div class="form-group">
                 <label for="username">Email <sup class="text-danger">*</sup></label>
                 <input type="text" name="username" id="username" class="form-control" placeholder="Enter Email" required>
@@ -70,8 +71,24 @@
 
 <style>
     .wrapper{
-        height: 100dvh;
+        height: 100%;
+        min-height: 100dvh;
+        background-color: rgba(2, 0, 20, 0.6);
+        width: 100%;
         display: flex;
         align-items: center;
+        color: #FFFFFF;
+    }
+    .form-control{
+        background-color: inherit !important;
+        color: #FFFFFF !important;
+    }
+    body{
+        background-image: url(assets/images/7xm.xyz591037.jpg);
+        background-position: center;
+        background-size: 100% 100%;
+        object-position: center;
+        object-fit: cover;
+        background-repeat: no-repeat;
     }
 </style>
