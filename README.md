@@ -1,25 +1,27 @@
-### HOW TO RUN THE PROJECT
-#### Localy
-<ul>
-<li>Have xampp, start xampp</li>
-<li>move folder to inside <code>htdocs</code> folder</li>
-<li>go to your browser an enter <code>http://127.0.0.1/project-folder-name/</code> to run</li>
-<li>go back to the folder and look for <code>config.php</code> inside relapce <code>define('BASE_URL', 'http://127.0.0.1/shamba/');</code> with <code>define('BASE_URL', 'http://127.0.0.1/project-folder/');</code></li>
-<li>You will need to look for this function <code>getActiveRecordId</code> it is in most of the file at the bottom(footer), replace <code>var url = 'http://127.0.0.1/shamba/';</code> with <code>var url = 'http://127.0.0.1/folder-name/';</code> the rest of the content of the url should remail the way they are.</li>
-</ul>
-#### Server
-<ul>
-<li>go back to the folder and look for <code>config.php</code> inside relapce <code>define('BASE_URL', 'http://127.0.0.1/shamba/');</code> with <code>define('BASE_URL', 'domain name');</code></li>
-<li>You will need to look for this function <code>getActiveRecordId</code> it is in most of the file at the bottom(footer), replace <code>var url = 'http://127.0.0.1/shamba/';</code> with <code>var url = 'domain name';</code> the rest of the content of the url should remail the way they are.</li>
-</ul>
+To set up the project on cPanel, follow these instructions:
 
+**Running the Project Locally:**
+1. Ensure you have XAMPP installed and running. Start XAMPP if it's not already running.
+2. Move the project folder to the `htdocs` folder of your XAMPP installation.
+3. Open your web browser and enter the following URL to run the project locally: `http://127.0.0.1/project-folder-name/`.
+4. In the project folder, locate the `config.php` file. Replace `define('BASE_URL', 'http://127.0.0.1/shamba/');` with `define('BASE_URL', 'http://127.0.0.1/project-folder/');`.
+5. Look for the `getActiveRecordId` function in most of the files (usually at the bottom, e.g., in the footer). Replace `var url = 'http://127.0.0.1/shamba/';` with `var url = 'http://127.0.0.1/folder-name/';`. Keep the rest of the URL content unchanged.
 
-#### Database connection
-<ul>
-<li>Go to <code>project-folder/database/Database.php</code> and update only <code>            } else {
-                $this -> db_host     = "127.0.0.1";
-                $this -> db_user     = "";
-                $this -> db_password = "";
-                $this -> db_name     = "";
-            }</code></li>
-</ul>
+**Running the Project on a Server (cPanel):**
+1. Upload the project folder to your web server using FTP or cPanel's file manager.
+2. In the project folder, locate the `config.php` file. Replace `define('BASE_URL', 'http://127.0.0.1/shamba/');` with `define('BASE_URL', 'domain name');`.
+3. Look for the `getActiveRecordId` function in most of the files (usually at the bottom, e.g., in the footer). Replace `var url = 'http://127.0.0.1/shamba/';` with `var url = 'domain name';`. Keep the rest of the URL content unchanged.
+
+**Database Connection:**
+1. Navigate to the `project-folder/database/Database.php` file.
+2. Update the database connection settings based on your cPanel configuration. Modify the following lines:
+   ```php
+   $this -> db_host     = "127.0.0.1"; // Replace with your database host.
+   $this -> db_user     = ""; // Replace with your database username.
+   $this -> db_password = ""; // Replace with your database password.
+   $this -> db_name     = ""; // Replace with your database name.
+   ```
+   
+   Fill in the appropriate values for your cPanel-hosted database.
+
+These instructions should help you set up and run your project on cPanel. Make sure to replace the placeholders with your actual domain name, database credentials, and project folder names as needed.
