@@ -67,9 +67,14 @@
 
       <div class="open_model mb-5">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Add User
-        </button>
+        <div class="d-flex">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Add User
+            </button>
+            <button type="button" class="btn btn-primary ml-2" data-toggle="modal" data-target="#exampleModal1">
+                Add CashFlow
+            </button>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -113,6 +118,53 @@
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Save User" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Fill the form to add user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="functions/save-cashflow-func.php" method="post">
+                        <div class="form-group">
+                            <label for="User">User (optional)</label>
+                            <select name="User" id="User" class="form-control" placeholder="User">
+                                <option value="">--SELECT USER--</option>
+                                <?php
+                                    $conn = new Database();
+                                    $db   = $conn -> connection();
+
+                                    $users = new Registration($db);
+                                    $user  = $users -> getUsers();
+
+                                    if($user['data']){
+                                        foreach($user['data'] as $user){
+                                ?>
+                                <option value="<?php echo $user['id'] ?>"><?php echo $user['Fname'].' '.$user['Lname'] ?></option>
+                                <?php
+                                        }
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Amount">Amount</label>
+                            <input type="number" name="Amount" id="Amount" class="form-control" placeholder="Amount" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save Amount" class="btn btn-primary">
                         </div>
                     </form>
                 </div>

@@ -44,6 +44,21 @@
             }
         }
 
+        public function getUserProfile()
+        {
+            $sql = "SELECT * FROM Registration WHERE Email = ?";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute([$this -> Email]);
+
+            if($query -> rowCount() > 0){
+                while($results = $query -> fetch(PDO::FETCH_ASSOC)){
+                    return ['status' => 200, 'data' => $results];
+                }
+            }else{
+                return ['status' => 404, 'message' => 'users not found'];
+            }
+        }
+
         public function signUp()
         {
             $sql = "SELECT * FROM Registration WHERE Email = ?";

@@ -67,6 +67,49 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+        <div class="all_expenses">
+          <h2 class="mt-3 mb-3">All Expenses</h2>
+        <div class="table-responsive py-5">
+          <table class="table table-active table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Project</th>
+                <th>Season</th>
+                <th>Expenses</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Date Added</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                  $conn = new Database();
+                  $db   = $conn -> connection();
+
+                  $project = new Projects($db);
+                  $projects = $project -> getProjects();
+
+                  if($projects['status'] == 200){
+                    foreach($projects['data'] as $projects){
+              ?>
+              <tr>
+                <td><?php echo $projects['id'] ?></td>
+                <td><?php echo $projects['ProjectName'] ?></td>
+                <td><?php echo $projects['Season'] ?></td>
+                <td><?php echo $projects['Expense'] ?></td>
+                <td><?php echo $projects['Amount'] ?></td>
+                <td><?php echo $projects['Date'] ?></td>
+                <td><?php echo $projects['DateAdded'] ?></td>
+              </tr>
+              <?php
+                    }
+                  }
+              ?>
+            </tbody>
+          </table>
+        </div>
+        </div>
         <div class="search_report py-5">
           <form action="#" method="post">
             <div class="row">
@@ -203,6 +246,166 @@
                 ?>
             </tbody>
         </table>
+      </div>
+
+      <div class="report_by_project" id="project">
+        <h2 class="mt-3 mb-3">Report: Cost by Project</h2>
+        <form action="#project" method="get">
+          <div class="row d-flex align-items-center">
+            <div class="form-group col-sm-4">
+                <label for="project">Project Name</label>
+                <select name="project" id="project" class="form-control" required>
+                    <option value=""> -- SELECT PROJECT --</option>
+                    <?php                            
+                        $conn = new Database();
+                        $db   = $conn -> connection();
+                        $users = new Scope($db);
+                        $user  = $users -> getScopes();
+  
+                        if($user['status'] == 200){
+                            foreach($user['data'] as $expense){
+                                echo "<option value='{$expense['Project']}'>{$expense['Project']}</option>";
+                            }
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="col-sm-2 form-group">
+              <input type="submit" value="Search" class="btn btn-primary">
+            </div>
+          </div>
+        </form>
+        <div class="table-responsive py-5">
+          <table class="table table-active table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Project</th>
+                <th>Season</th>
+                <th>Expenses</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Date Added</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                if(isset($_GET['project'])){
+                  $conn = new Database();
+                  $db   = $conn -> connection();
+
+                  $project = new Projects($db);
+                  $project -> ProjectName = $_GET['project'];
+                  $projects = $project -> getProjectByProjectName();
+
+                  if($projects['status'] == 200){
+                    foreach($projects['data'] as $projects){
+              ?>
+              <tr>
+                <td><?php echo $projects['id'] ?></td>
+                <td><?php echo $projects['ProjectName'] ?></td>
+                <td><?php echo $projects['Season'] ?></td>
+                <td><?php echo $projects['Expense'] ?></td>
+                <td><?php echo $projects['Amount'] ?></td>
+                <td><?php echo $projects['Date'] ?></td>
+                <td><?php echo $projects['DateAdded'] ?></td>
+              </tr>
+              <?php
+                    }
+                  }
+                }
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="report_by_project" id="seasons1">
+        <h2 class="mt-3 mb-3">Report: Seasons per Year</h2>
+        <form action="#seasons1" method="get">
+          <div class="row d-flex align-items-center">
+            <div class="form-group col-sm-4">
+                <label for="years">Year</label>
+                <select name="years" id="years" class="form-control">
+                    <option value=""> -- SELECT YEAR --</option>
+                    <?php                            
+                        $year = date('Y');
+                        for($i = 0; $i < 15; $i++){
+                          $f_year = $year - $i;
+                          echo "<option value='{$f_year}'>{$f_year}</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="seasons">Project Season</label>
+                <select name="seasons" id="seasons" class="form-control" required>
+                    <option value=""> -- SELECT SEASON --</option>
+                    <?php                            
+                        $conn = new Database();
+                        $db   = $conn -> connection();
+                        $users = new Scope($db);
+                        $user  = $users -> getScopes();
+  
+                        if($user['status'] == 200){
+                            foreach($user['data'] as $expense){
+                                echo "<option value='{$expense['Season']}'>{$expense['Season']}</option>";
+                            }
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="col-sm-2 form-group">
+              <input type="submit" value="Search" class="btn btn-primary">
+            </div>
+          </div>
+        </form>
+        <div class="table-responsive py-5">
+          <div class=""><b>Season: <?php echo $_GET['seasons']; ?></b></div>
+          <div class=""><b>Date: <?php echo $_GET['years']; ?></b></div>
+          <table class="table table-active table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Project</th>
+                <th>Season</th>
+                <th>Expenses</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Date Added</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                if(isset($_GET['seasons'])){
+                  $conn = new Database();
+                  $db   = $conn -> connection();
+
+                  $project = new Projects($db);
+                  $project -> Season = $_GET['seasons'];
+                  $project -> Date = $_GET['years'];
+                  $projects = $project -> getProjectBySeasonPerYear();
+
+                  if($projects['status'] == 200){
+                    foreach($projects['data'] as $projects){
+              ?>
+              <tr>
+                <td><?php echo $projects['id'] ?></td>
+                <td><?php echo $projects['ProjectName'] ?></td>
+                <td><?php echo $projects['Season'] ?></td>
+                <td><?php echo $projects['Expense'] ?></td>
+                <td><?php echo $projects['Amount'] ?></td>
+                <td><?php echo $projects['Date'] ?></td>
+                <td><?php echo $projects['DateAdded'] ?></td>
+              </tr>
+              <?php
+                    }
+                  }
+                }
+              ?>
+            </tbody>
+          </table>
+        </div>
       </div>
         <!-- /.row -->
       </div>

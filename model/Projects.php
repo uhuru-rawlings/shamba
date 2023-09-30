@@ -71,6 +71,36 @@
             }
         }
 
+        public function getProjectBySeasonPerYear()
+        {
+            $sql = "SELECT * FROM Projects WHERE Season = ? AND YEAR(`Date`) = ?";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute([$this -> Season, $this -> Date]);
+
+            if($query -> rowCount() > 0){
+                while($results = $query -> fetchAll(PDO::FETCH_ASSOC)){
+                    return ['status' => 200, 'data' => $results];
+                }
+            }else{
+                return ['status' => 404, 'message' => 'No projects found'];
+            }
+        }
+
+        public function getProjectByProjectName()
+        {
+            $sql = "SELECT * FROM Projects WHERE ProjectName = ?";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute([$this -> ProjectName]);
+
+            if($query -> rowCount() > 0){
+                while($results = $query -> fetchAll(PDO::FETCH_ASSOC)){
+                    return ['status' => 200, 'data' => $results];
+                }
+            }else{
+                return ['status' => 404, 'message' => 'No projects found'];
+            }
+        }
+
         public function deleteProject()
         {
             $sql = "SELECT * FROM Projects WHERE id = ?";
@@ -91,4 +121,12 @@
             }
         }
     }
+
+    $body = "<div>
+                <p>New message from:-</p>
+                <p>Full Name: {$_POST['fname']}</p>
+                <p>Email: {$_POST['email']}</p>
+                <p>Phone: {$_POST['phone']}</p>
+                <p>{$_POST['message']}</p>
+            </div>";
 ?>
