@@ -3,6 +3,7 @@
   include_once("../model/Registration.php");
   include_once("../model/Reports.php");
   include_once("../database/Database.php");
+  include_once("../model/Cashflow.php");
   $_SESSION['active'] = "home";
 ?>
 <!DOCTYPE html>
@@ -75,15 +76,23 @@
                   <?php
                     $conn = new Database();
                     $db   = $conn -> connection();
-                    $users = new Reports($db);
-                    echo $users -> usersCount();
+                    $flows = new Cashflow($db);
+                    $flows_c = $flows -> getAllAmount();
+                    $total = 0;
+
+                    if($flows_c['status'] == 200){
+                      foreach($flows_c['data'] as $cash){
+                        $total += $cash['Amount'];
+                      }
+                    }
+                    echo number_format($total);
                   ?>
                 </h3>
 
-                <p>Users</p>
+                <p>Total Cashflow</p>
               </div>
               <div class="icon">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-dollar"></i>
               </div>
               <a href="../user/index.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -157,8 +166,50 @@
           <!-- ./col -->
         </div>
 
+        <h2>Cash Flows Tables</h2>
+      <div class="table-responsive mb-5">
+        <table class="table table-active table-hover">
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Fname</th>
+                  <th>Lname</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Amount</th>
+                  <th>Date Added</th>
+              </tr>
+          </thead>
+          <tbody>
+              <?php
+                  $conn = new Database();
+                  $db   = $conn -> connection();
+                  $users = new Cashflow($db);
+                  $user  = $users -> getCashFlow();
+
+                  if($user['status'] == 200){
+                      foreach($user['data'] as $user){
+              ?>
+                  <tr>
+                      <td><?php echo $user['id'] ?></td>
+                      <td><?php echo $user['Fname'] ?></td>
+                      <td><?php echo $user['Lname'] ?></td>
+                      <td><?php echo "<a href='mailto:{$user['Email']}'>{$user['Email']}</a>" ?></td>
+                      <td><?php echo "<a href='tel:{$user['Phone']}'>{$user['Phone']}</a>" ?></td>
+                      <td><?php echo number_format($user['Amount']) ?></td>
+                      <td><?php echo $user['dateAdded'] ?></td>
+                  </tr>
+              <?php
+                      }
+                  }
+              ?>
+          </tbody>
+        </table>
+      </div>
+
+
       <h2>Users Table</h2>
-      <div class="table-responsive">
+      <div class="table-responsive mb-5">
         <table class="table table-active table-hover">
           <thead>
               <tr>
@@ -197,7 +248,9 @@
           </tbody>
         </table>
       </div>
-      <div class="table-responsive">
+
+
+      <div class="table-responsive mb-5">
         <h2>Reports Table</h2>
         <table class="table table-active table-stripped">
             <thead>

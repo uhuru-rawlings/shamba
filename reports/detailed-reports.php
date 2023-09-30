@@ -91,7 +91,7 @@
                                         $conn = new Database();
                                         $db   = $conn -> connection();
                                         $users = new Scope($db);
-                                        $user  = $users -> getScopes();
+                                        $user  = $users -> getDistinctProjectScopes();
 
                                         if($user['status'] == 200){
                                             foreach($user['data'] as $expense){
@@ -109,7 +109,7 @@
                                         $conn = new Database();
                                         $db   = $conn -> connection();
                                         $users = new Scope($db);
-                                        $user  = $users -> getScopes();
+                                        $user  = $users -> getDistinctSeasonScopes();
     
                                         if($user['status'] == 200){
                                             foreach($user['data'] as $expense){
@@ -235,7 +235,7 @@
                                     $conn = new Database();
                                     $db   = $conn -> connection();
                                     $users = new Scope($db);
-                                    $user  = $users -> getScopes();
+                                    $user  = $users -> getDistinctProjectScopes();
 
                                     if($user['status'] == 200){
                                         foreach($user['data'] as $expense){
@@ -253,7 +253,7 @@
                                     $conn = new Database();
                                     $db   = $conn -> connection();
                                     $users = new Scope($db);
-                                    $user  = $users -> getScopes();
+                                    $user  = $users -> getDistinctSeasonScopes();
     
                                     if($user['status'] == 200){
                                         foreach($user['data'] as $expense){

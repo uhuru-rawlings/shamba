@@ -36,5 +36,20 @@
                 return ['status' => 404, 'message' => 'No data found'];
             }
         }
+
+        public function getAllAmount()
+        {
+            $sql = "SELECT * FROM Cashflow";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute();
+
+            if($query -> rowCount() > 0){
+                while($results = $query -> fetchAll(PDO::FETCH_ASSOC)){
+                    return ['status' => 200, 'data' => $results];
+                }
+            }else{
+                return ['status' => 404, 'message' => 'No data found'];
+            }
+        }
     }
 ?>

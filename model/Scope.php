@@ -47,6 +47,35 @@
             }
         }
 
+        public function getDistinctProjectScopes()
+        {
+            $sql = "SELECT DISTINCT Project FROM Scope";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute();
+
+            if($query){
+                while($results = $query -> fetchAll(PDO::FETCH_ASSOC)){
+                    return ['status' => 200, 'data' => $results];
+                }
+            }else{
+                return ['status' => 500, 'message' => 'Oops! something went wrong, try again'];
+            }
+        }
+        public function getDistinctSeasonScopes()
+        {
+            $sql = "SELECT DISTINCT Season FROM Scope";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute();
+
+            if($query){
+                while($results = $query -> fetchAll(PDO::FETCH_ASSOC)){
+                    return ['status' => 200, 'data' => $results];
+                }
+            }else{
+                return ['status' => 500, 'message' => 'Oops! something went wrong, try again'];
+            }
+        }
+
         public function getScope()
         {
             $sql = "SELECT * FROM Scope WHERE id = ?";
