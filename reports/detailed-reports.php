@@ -142,7 +142,7 @@
                             <label for="amount">Amount</label>
                             <input type="number" name="amount" id="amount" class="form-control" placeholder="Amount" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="picker">
                             <label for="date">Date</label>
                             <input type="date" name="date" id="date" class="form-control" placeholder="Confirm Password" required>
                         </div>
@@ -286,7 +286,7 @@
                         <label for="amount">Amount</label>
                         <input type="number" name="amount" id="amounts" class="form-control" placeholder="Amount" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="picker">
                         <label for="date">Date</label>
                         <input type="date" name="date" id="dates" class="form-control" placeholder="Confirm Password" required>
                     </div>

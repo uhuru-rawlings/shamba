@@ -3,6 +3,7 @@
         private $conn;
         public $user;
         public $amount;
+        public $id;
 
         public function __construct($db)
         {
@@ -50,6 +51,28 @@
             }else{
                 return ['status' => 404, 'message' => 'No data found'];
             }
+        }
+
+        public function getUSerAmount()
+        {
+            $sql = "SELECT * FROM Cashflow WHERE User = ?";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute([$this -> user]);
+
+            if($query -> rowCount() > 0){
+                while($results = $query -> fetchAll(PDO::FETCH_ASSOC)){
+                    return ['status' => 200, 'data' => $results];
+                }
+            }else{
+                return ['status' => 404, 'message' => 'No data found'];
+            }
+        }
+
+        public function reduceAmount()
+        {
+            $sql = "UPDATE Cashflow SET Amount = ? WHERE id = ?";
+            $query = $this -> conn -> prepare($sql);
+            $query -> execute([$this -> amount, $this -> id]);
         }
     }
 ?>

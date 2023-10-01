@@ -17,7 +17,7 @@
 
         public function createProject()
         {
-            $sql = "INSERT INTO Projects(`ProjectName`,`Season`,`Expense`,`Amount`,`Date`) VALUES(?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO Projects(`ProjectName`,`Season`,`Expense`,`Amount`,`Date`) VALUES(?,?,?,?,?)";
             $query = $this -> conn -> prepare($sql);
             $query -> execute([$this -> ProjectName, $this -> Season, $this -> Expense, $this -> Amount, $this -> Date]);
 

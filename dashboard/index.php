@@ -89,7 +89,7 @@
                   ?>
                 </h3>
 
-                <p>Total Cashflow</p>
+                <p>Amount Remaining</p>
               </div>
               <div class="icon">
                 <i class="fas fa-dollar"></i>

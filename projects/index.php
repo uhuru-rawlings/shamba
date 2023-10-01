@@ -3,6 +3,7 @@
   include_once("../model/Projects.php");
   include_once("../model/Scope.php");
   include_once("../model/Expenditure.php");
+  include_once("../model/Registration.php");
   include_once("../database/Database.php");
   $_SESSION['active'] = "project";
 ?>
@@ -12,7 +13,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Farm</title>
-
+  <!-- <link rel ="stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> 
+  <link rel ="stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css"> -->
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -84,6 +86,27 @@
                 </div>
                 <div class="modal-body">
                     <form action="functions/save-projects-func.php" method="post">
+                        <div class="form-group">
+                            <label for="User">Deduct From</label>
+                            <select name="User" id="User" class="form-control" placeholder="User" required>
+                                <option value="">--SELECT USER--</option>
+                                <?php
+                                    $conn = new Database();
+                                    $db   = $conn -> connection();
+
+                                    $users = new Registration($db);
+                                    $user  = $users -> getUsers();
+
+                                    if($user['data']){
+                                        foreach($user['data'] as $user){
+                                ?>
+                                <option value="<?php echo $user['id'] ?>"><?php echo $user['Fname'].' '.$user['Lname'] ?></option>
+                                <?php
+                                        }
+                                    }
+                                ?>
+                            </select>
+                        </div>
                         <div class="row">
                             <div class="form-group col-sm-6">
                                 <label for="project_name">Project Name</label>
@@ -144,9 +167,9 @@
                             <label for="amount">Amount</label>
                             <input type="number" name="amount" id="amount" class="form-control" placeholder="Amount" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="picker">
                             <label for="date">Date</label>
-                            <input type="date" name="date" id="date" class="form-control" placeholder="Confirm Password" required>
+                            <input type="date" name="date" id="date" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Save Records" class="btn btn-primary">
@@ -284,9 +307,9 @@
                         <label for="amount">Amount</label>
                         <input type="number" name="amount" id="amounts" class="form-control" placeholder="Amount" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="picker">
                         <label for="date">Date</label>
-                        <input type="date" name="date" id="dates" class="form-control" placeholder="Confirm Password" required>
+                        <input type="date" name="date" id="dates" class="form-control"  required>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Save Records" class="btn btn-primary">
